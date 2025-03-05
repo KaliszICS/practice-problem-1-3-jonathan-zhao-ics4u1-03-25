@@ -9,35 +9,38 @@ public class PracticeProblem {
 
 	}
 
-	public static String readFile(String filename) {
-		BufferedReader reader = null;
-		String file = "";
-		try {
-			reader = new BufferedReader(new FileReader(filename));
-			while (reader.ready()) {
-				file += (char) reader.read();
+	public static String readFile(String filename){
+		FileReader inputStream = null;
+		String word = "";
+		try{
+			inputStream = new FileReader(filename);
+			int c;
+			while((c = inputStream.read()) != -1){
+				word += (char)(c);
 			}
-		} catch (FileNotFoundException e) {
+		}
+		catch(IOException e){
 			System.out.println(e);
-			
-		} catch (IOException e) {
-			System.out.println(e);
+		
+		}finally{
 
-		} finally {
-			try {
-				if (reader != null) {
-					reader.close();
+			try{
+				if(inputStream != null){
+					inputStream.close();
 				}
-			} catch (IOException e) {
+			}
+			catch(IOException e){
 				System.out.println(e);
 			}
 		}
-		return file.strip();
+		return word;
 	}
+	
 
 	public static String backwardsReadFile(String fileName) {
 		BufferedReader reader = null;
 		String file = "";
+
 		try {
 			reader = new BufferedReader(new FileReader(fileName));
 			while (reader.ready()) {
@@ -58,6 +61,6 @@ public class PracticeProblem {
 				System.out.println(e);
 			}
 		}
-		return file.strip();
+		return file;
 	}
-}
+	}
